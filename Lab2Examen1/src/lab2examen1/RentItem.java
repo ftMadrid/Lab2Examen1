@@ -37,4 +37,9 @@ public abstract class RentItem {
     public double getPrecio_renta() {
         return precio_renta;
     }
+    
+    public String getRuta()
+    {
+    return rutaI;
+    }
 }
