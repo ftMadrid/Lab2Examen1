@@ -4,20 +4,21 @@
  */
 package lab2examen1;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 /**
  *
  * @author user
  */
-public class ClasePrincipalGui extends JFrame {
-    public ClasePrincipalGui()
+public class ImprimirTodo extends JFrame {
+    
+    int pagina;
+    public ImprimirTodo()
     {
-    setSize(700,500);
-    setLocationRelativeTo(null);
     
     }
     
-
+    
+    
     
 }
