@@ -70,10 +70,40 @@ public class Principal extends JFrame {
     }
     
     private void ejecutarMenuAction() {
+        String input = javax.swing.JOptionPane.showInputDialog(null, "Ingrese el codigo del juego:", "Submenu Juego", javax.swing.JOptionPane.PLAIN_MESSAGE);
+
+            if (input == null) { // Si cierra el cuadro de diálogo
+                return;
+            }
+            Game item = null;
+            try {
+                int codigo = Integer.parseInt(input);
+                
+                for (RentItem i : items) {
+                if (i.getCodigo() == codigo && i instanceof Game) {
+                    item = (Game)i;
+                }
+            }
+                
+                if (item == null)
+                {
+                    //No encontrado
+                return;
+                }
+                else
+                {
+                item.submenu();
+                }
+            } catch (NumberFormatException e) {
+                javax.swing.JOptionPane.showMessageDialog(null, "Ingrese un num valido.");
+            }
+        
         
     }
     
     private void imprimirAction() {
+        dispose();
+        new ImprimirTodo().setVisible(true);
         
     }
     
