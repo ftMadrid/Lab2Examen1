@@ -7,6 +7,7 @@ import lab2examen1.RentItem;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import lab2examen1.Principal;
 
 public class AgregarItem extends JFrame {
 
@@ -63,16 +64,37 @@ public class AgregarItem extends JFrame {
                 txtRuta.setText(rutaImagen);
             }
         });
-        
+
         btnAgregar.setFont(new Font("Segoe UI", Font.BOLD, 18));
         btnAgregar.setBounds(360, 300, 220, 40);
         btnAgregar.setForeground(Color.GREEN);
         btnAgregar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
+        btnAgregar.addActionListener(e -> {
+
+            agregarItem();
+
+        });
+
         btnRegresar.setFont(new Font("Segoe UI", Font.BOLD, 18));
         btnRegresar.setBounds(360, 350, 220, 40);
         btnRegresar.setForeground(Color.red);
         btnRegresar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnRegresar.addActionListener(e -> {
+
+            dispose();
+            new Principal().setVisible(true);
+
+        });
+
+        ButtonGroup grupo = new ButtonGroup();
+        grupo.add(rbMovie);
+        grupo.add(rbGame);
+
+        rbMovie.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        rbMovie.setBounds(420, 70, 120, 40);
+
+        rbGame.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        rbGame.setBounds(540, 70, 120, 40);
 
         add(titulo);
         add(codigoLabel);
@@ -85,6 +107,8 @@ public class AgregarItem extends JFrame {
         add(btnImagen);
         add(btnAgregar);
         add(btnRegresar);
+        add(rbMovie);
+        add(rbGame);
 
     }
 
@@ -105,12 +129,14 @@ public class AgregarItem extends JFrame {
             if (rbMovie.isSelected()) {
                 double precio = Double.parseDouble(txtPrecio.getText());
                 nuevo = new Movie(codigo, nombre, precio, rutaImagen);
-            } else { // Game
-                nuevo = new Game(codigo, nombre, 20, rutaImagen);
+            } else {
+                nuevo = new Game(codigo, nombre, rutaImagen);
             }
 
             items.add(nuevo);
             JOptionPane.showMessageDialog(this, "Item agregado correctamente.");
+            dispose();
+            new Principal().setVisible(true);
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Datos invalidos.", "Error", JOptionPane.ERROR_MESSAGE);
