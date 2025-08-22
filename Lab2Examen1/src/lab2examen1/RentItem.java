@@ -29,7 +29,7 @@ public abstract class RentItem {
         String precio = (precio_renta > 0) ? String.format("Lps.%.2f", precio_renta) : "N/A";
         return "\n| Codigo: " + codigo
                 + "\n| Nombre: " + nombre
-                + "\n| Precio de Renta: " + precio;
+                + "\n| Precio de Renta: "+precio;
     }
 
     public abstract double pagoRenta(int dias);

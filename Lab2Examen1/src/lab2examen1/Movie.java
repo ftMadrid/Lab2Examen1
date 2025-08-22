@@ -66,11 +66,12 @@ public class Movie extends RentItem {
 
     @Override
     public String toString() {
-
+        String precio = (precio_renta > 0) ? String.format("Lps.%.2f", precio_renta) : "N/A";
         return "- Movie\n"
-                + "\n| Estado: " + getEstado()
-                + super.toString();
-
+                + "\n| Codigo: " + codigo
+                + "\n| Nombre: " + nombre
+                + "\n| Precio de Renta: "+precio
+                + "\n| Estado: " + getEstado();
     }
 
 }
