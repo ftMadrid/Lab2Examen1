@@ -10,7 +10,7 @@ public abstract class RentItem {
     protected int cantidadCopias = 0;
     protected ImageIcon imagen;
     
-    public RentItem(int codigo, String nombre, double precio_renta) {
+    public RentItem(int codigo, String nombre, double precio_renta,String ruta) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio_renta = precio_renta;
