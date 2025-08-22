@@ -92,7 +92,7 @@ public class AgregarItem extends JFrame {
 
         rbMovie.setFont(new Font("Segoe UI", Font.BOLD, 22));
         rbMovie.setBounds(420, 70, 120, 40);
-        
+
         rbMovie.addItemListener(e -> {
             if (rbMovie.isSelected()) {
                 txtPrecio.setEditable(true);
@@ -130,11 +130,22 @@ public class AgregarItem extends JFrame {
 
     private void agregarItem() {
         try {
+            // Validar campos vacíos
+            if (txtCodigo.getText().isEmpty()
+                    || txtNombre.getText().isEmpty()
+                    || txtRuta.getText().isEmpty()
+                    || (!rbMovie.isSelected() && !rbGame.isSelected())
+                    || (rbMovie.isSelected() && txtPrecio.getText().isEmpty())) {
+
+                JOptionPane.showMessageDialog(this, "Tiene que llenar todos los campos!", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             int codigo = Integer.parseInt(txtCodigo.getText());
 
             for (RentItem i : items) {
                 if (i.getCodigo() == codigo) {
-                    JOptionPane.showMessageDialog(this, "El código ya existe!", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "El codigo ya existe!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             }
@@ -155,7 +166,7 @@ public class AgregarItem extends JFrame {
             new Principal().setVisible(true);
 
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Datos invalidos.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Datos invalidos.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
