@@ -88,6 +88,7 @@ public class Principal extends JFrame {
                 
                 if (item == null)
                 {
+                    JOptionPane.showMessageDialog(this, "Item no encontrado o no es Game", "Error", JOptionPane.ERROR_MESSAGE);
                     //No encontrado
                 return;
                 }

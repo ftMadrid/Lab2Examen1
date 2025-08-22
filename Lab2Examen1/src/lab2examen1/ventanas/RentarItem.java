@@ -25,6 +25,7 @@ public class RentarItem extends JFrame {
     private final JTextField txtTotal = new JTextField();
 
     private final JButton btnConsultar = new JButton("Consultar");
+    private final JButton btnRegresar = new JButton("Regresar"); // nuevo botón
 
     public RentarItem() {
         initVentana();
@@ -32,7 +33,7 @@ public class RentarItem extends JFrame {
     }
 
     private void initVentana() {
-        setSize(700, 500);
+        setSize(700, 550); // un poco más de altura para el botón
         setTitle("LAB. DE PROGRAMACIÓN II | CONSULTAR RENTA");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -99,6 +100,17 @@ public class RentarItem extends JFrame {
         txtTotal.setBounds(250, 290, 150, 30);
         txtTotal.setEditable(false);
         add(txtTotal);
+
+        // Botón Regresar
+        btnRegresar.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        btnRegresar.setBounds(500, 400, 150, 40);
+        btnRegresar.setForeground(Color.RED);
+        btnRegresar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnRegresar.addActionListener(e -> {
+            dispose(); // cerrar esta ventana
+            new Principal().setVisible(true); // abrir ventana Principal
+        });
+        add(btnRegresar);
     }
 
     private void consultarItem() {
@@ -113,7 +125,7 @@ public class RentarItem extends JFrame {
                 }
             }
 
-            if (encontrado != null && !txtDias.equals("")) {
+            if (encontrado != null && !txtDias.getText().trim().isEmpty()) {
                 // Mostrar datos
                 txtNombre.setText(encontrado.getNombre());
                 txtPrecio.setText(String.valueOf(encontrado.getPrecio_renta()));
@@ -128,9 +140,9 @@ public class RentarItem extends JFrame {
                     txtTotal.setText("");
                 }
 
-            }else if (txtDias.equals(""))
+            }else if (txtDias.getText().trim().isEmpty())
             {
-            JOptionPane.showMessageDialog(this, "Ocuaps poner la cantidad de dias.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ocupas poner la cantidad de dias a rentar.", "Error", JOptionPane.ERROR_MESSAGE);
             }
             
             else {
