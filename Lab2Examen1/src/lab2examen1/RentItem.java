@@ -9,11 +9,13 @@ public abstract class RentItem {
     protected double precio_renta;
     protected int cantidadCopias = 0;
     protected ImageIcon imagen;
+    String rutaI;
     
     public RentItem(int codigo, String nombre, double precio_renta,String ruta) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio_renta = precio_renta;
+        this.rutaI = ruta;
     }
     
     public String toString() {
