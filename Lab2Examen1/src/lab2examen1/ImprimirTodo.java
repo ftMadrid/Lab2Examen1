@@ -21,19 +21,16 @@ public class ImprimirTodo extends JFrame {
         setResizable(false);
         setLayout(null);
 
-        // calcular cuantas paginitas hay en total
         if (Principal.items.isEmpty()) {
             paginas = 1;
         } else {
             paginas = (int) Math.ceil(Principal.items.size() / 6.0);
         }
 
-        // Panel central
-        panelCartelera = new JPanel(null); // NULL
+        panelCartelera = new JPanel(null);
         panelCartelera.setBounds(20, 20, 740, 550);
         add(panelCartelera);
 
-        // Panel de nav
         JPanel panel = new JPanel();
         panel.setBounds(250, 590, 300, 40);
         btnAnterior = new JButton("Anterior");
@@ -48,6 +45,16 @@ public class ImprimirTodo extends JFrame {
         panel.add(btnSiguiente);
 
         add(panel);
+
+        JButton btnRegresar = new JButton("Regresar");
+        btnRegresar.setBounds(348, 630, 100, 30);
+        btnRegresar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnRegresar.setForeground(Color.red);
+        btnRegresar.addActionListener(e -> {
+            dispose();
+            new Principal().setVisible(true);
+        });
+        add(btnRegresar);
 
         mostrarPagina();
         System.out.println("A1");
@@ -74,7 +81,6 @@ public class ImprimirTodo extends JFrame {
         int ancho = 220, alto = 260; // tamano cartel
         int contador = 0;//Contador
 
-        // recorrer arr
         for (int i = inicio; i < fin; i++) {
             RentItem item = Principal.items.get(i);
             System.out.println("A");
@@ -82,13 +88,10 @@ public class ImprimirTodo extends JFrame {
             JPanel panelItem = new JPanel(null);
             panelItem.setBounds(x, y, ancho, alto);
 
-            // img
+            String ruta = item.getRuta();
             JLabel lblImg;
-            ImageIcon icon;
-            java.net.URL imgURL = getClass().getResource(item.getRuta());
-            System.out.println(item.getRuta());
-            if (imgURL != null) {
-                icon = new ImageIcon(imgURL);
+            if (ruta != null && !ruta.isEmpty()) {
+                ImageIcon icon = new ImageIcon(ruta);
                 Image img = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
                 lblImg = new JLabel(new ImageIcon(img));
             } else {
@@ -114,7 +117,6 @@ public class ImprimirTodo extends JFrame {
 
             panelCartelera.add(panelItem);
 
-            //(3 c x 2 2)
             contador++;
             if (contador % 3 == 0) { // pasa a la siguiente fila
                 x = 20;
