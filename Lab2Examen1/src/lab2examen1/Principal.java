@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import lab2examen1.ventanas.AgregarItem;
 import lab2examen1.ventanas.Rentar;
+import lab2examen1.ventanas.RentarItem;
 
 public class Principal extends JFrame {
 
@@ -66,7 +67,7 @@ public class Principal extends JFrame {
     
     private void rentarAction() {
         dispose();
-        new Rentar().setVisible(true);
+        new RentarItem().setVisible(true);
     }
     
     private void ejecutarMenuAction() {
