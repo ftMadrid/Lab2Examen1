@@ -17,8 +17,7 @@ public abstract class RentItem {
     }
     
     public String toString() {
-        return "\n"
-                +"\n| Codigo: "+codigo
+        return "\n| Codigo: "+codigo
                 +"\n| Nombre: "+nombre
                 +String.format("\n| Precio de Renta: Lps.%.2f", precio_renta);
     }
