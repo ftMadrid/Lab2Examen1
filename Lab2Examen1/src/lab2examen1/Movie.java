@@ -1,6 +1,7 @@
 package lab2examen1;
 
 import java.util.Calendar;
+import javax.swing.ImageIcon;
 
 public class Movie extends RentItem {
 
