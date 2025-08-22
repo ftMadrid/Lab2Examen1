@@ -38,6 +38,7 @@ public class Movie extends RentItem {
         }
     }
 
+    @Override
     public double pagoRenta(int dias) {
 
         switch (getEstado()) {
@@ -62,6 +63,7 @@ public class Movie extends RentItem {
         }
     }
 
+    @Override
     public String toString() {
 
         return "- Movie\n"
