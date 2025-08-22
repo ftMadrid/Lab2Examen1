@@ -11,7 +11,7 @@ import lab2examen1.Principal;
 
 public class AgregarItem extends JFrame {
 
-    public static ArrayList<RentItem> items = new ArrayList<>();
+    public ArrayList<RentItem> items = Principal.items;
 
     public AgregarItem() {
         initVentana();
@@ -92,9 +92,25 @@ public class AgregarItem extends JFrame {
 
         rbMovie.setFont(new Font("Segoe UI", Font.BOLD, 22));
         rbMovie.setBounds(420, 70, 120, 40);
+        
+        rbMovie.addItemListener(e -> {
+            if (rbMovie.isSelected()) {
+                txtPrecio.setEditable(true);
+                txtPrecio.setEnabled(true);
+                txtPrecio.setText("");
+            }
+        });
 
         rbGame.setFont(new Font("Segoe UI", Font.BOLD, 22));
         rbGame.setBounds(540, 70, 120, 40);
+
+        rbGame.addItemListener(e -> {
+            if (rbGame.isSelected()) {
+                txtPrecio.setEditable(false);
+                txtPrecio.setEnabled(false);
+                txtPrecio.setText("N/A");
+            }
+        });
 
         add(titulo);
         add(codigoLabel);
