@@ -18,7 +18,7 @@ public class Game extends RentItem implements MenuActions {
     Calendar fechaPublicacion;
     ArrayList<String> Especificaciones;
 
-    public Game(int codigo, String nombre, double precio_renta, String rutaI) {
+    public Game(int codigo, String nombre, String rutaI) {
         super(codigo, nombre, 20, rutaI);//Fijo en 20
         //RutaI - rutaImagen no se como se cnosigue pero ahi esta
         fechaPublicacion = Calendar.getInstance();

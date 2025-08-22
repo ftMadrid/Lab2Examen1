@@ -99,8 +99,7 @@ public class ImprimirTodo extends JFrame {
         // Ejemplo: antes deberías cargar items en Principal.items
         Principal.items = new ArrayList<>();
         // Principal.items.add(new Movie(...));
-        // Principal.items.add(new Game(...));
-
+        Principal.items.add(new Game(1,"a",50,""));
         new ImprimirTodo().setVisible(true);
     }
 }
