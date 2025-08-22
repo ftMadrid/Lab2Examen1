@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import com.toedter.calendar.JDateChooser;
 
 /**
  *
@@ -83,43 +84,45 @@ public class Game extends RentItem implements MenuActions {
                 opcion = Integer.parseInt(input);
                 ejecutarOpcion(opcion);
             } catch (NumberFormatException e) {
-                javax.swing.JOptionPane.showMessageDialog(null, "Ingrese un número válido.");
+                javax.swing.JOptionPane.showMessageDialog(null, "Ingrese un num valido.");
             }
 
         } while (opcion != 4);
     }
 
-    @Override
+@Override
 public void ejecutarOpcion(int opcion) {
     switch (opcion) {
         case 1 -> {
-            // Actualizar fecha con JDateChooser
+            // Actualizar fecha usando JDateChooser
             JDateChooser dateChooser = new JDateChooser();
             dateChooser.setDateFormatString("yyyy-MM-dd");
 
-            int result = JOptionPane.showConfirmDialog(null, dateChooser, "Seleccione fecha de publicación",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            int result = JOptionPane.showConfirmDialog(null, dateChooser, 
+                    "Seleccione fecha de publicación", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
             if (result == JOptionPane.OK_OPTION) {
-                Date selectedDate = dateChooser.getDate();
-                if (selectedDate != null) {
+                Date fechaSeleccionada = dateChooser.getDate();
+                if (fechaSeleccionada != null) {
                     Calendar nuevaFecha = Calendar.getInstance();
-                    nuevaFecha.setTime(selectedDate);
+                    nuevaFecha.setTime(fechaSeleccionada);
                     setFechaPublicacion(nuevaFecha);
-                    JOptionPane.showMessageDialog(null, "Fecha actualizada con éxito.");
+                    JOptionPane.showMessageDialog(null, "Fecha actualizada con exit.");
                 } else {
                     JOptionPane.showMessageDialog(null, "No se selecciono ninguna fecha.");
                 }
             }
         }
+
         case 2 -> {
             // Agregar especificación
-            String esp = JOptionPane.showInputDialog("Ingrese Especificacion:");
+            String esp = JOptionPane.showInputDialog("Ingrese especificacion:");
             if (esp != null && !esp.trim().isEmpty()) {
                 Especificaciones.add(esp);
                 JOptionPane.showMessageDialog(null, "Especificacion agregada.");
             }
         }
+
         case 3 -> {
             // Ver especificaciones
             if (Especificaciones.isEmpty()) {
@@ -128,7 +131,9 @@ public void ejecutarOpcion(int opcion) {
                 JOptionPane.showMessageDialog(null, "Especificaciones:\n" + listEspecificaciones());
             }
         }
+
         case 4 -> JOptionPane.showMessageDialog(null, "Saliendo del submenu...");
+
         default -> JOptionPane.showMessageDialog(null, "Opcion invalid.");
     }
 }
