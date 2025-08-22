@@ -68,7 +68,7 @@ public class Movie extends RentItem {
     public String toString() {
 
         return "- Movie\n"
-                + "\nEstado: " + getEstado()
+                + "\n| Estado: " + getEstado()
                 + super.toString();
 
     }
