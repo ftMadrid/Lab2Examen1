@@ -50,6 +50,7 @@ public class ImprimirTodo extends JFrame {
         add(panel);
 
         mostrarPagina();
+        System.out.println("A1");
     }
 
     private void cambiarPagina(int dir) {
@@ -76,6 +77,7 @@ public class ImprimirTodo extends JFrame {
         // recorrer arr
         for (int i = inicio; i < fin; i++) {
             RentItem item = Principal.items.get(i);
+            System.out.println("A");
 
             JPanel panelItem = new JPanel(null);
             panelItem.setBounds(x, y, ancho, alto);
