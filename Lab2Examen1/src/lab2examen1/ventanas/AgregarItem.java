@@ -67,10 +67,12 @@ public class AgregarItem extends JFrame {
         btnAgregar.setFont(new Font("Segoe UI", Font.BOLD, 18));
         btnAgregar.setBounds(360, 300, 220, 40);
         btnAgregar.setForeground(Color.GREEN);
+        btnAgregar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         btnRegresar.setFont(new Font("Segoe UI", Font.BOLD, 18));
         btnRegresar.setBounds(360, 350, 220, 40);
         btnRegresar.setForeground(Color.red);
+        btnRegresar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         add(titulo);
         add(codigoLabel);
