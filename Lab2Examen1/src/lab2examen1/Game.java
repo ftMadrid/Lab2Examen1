@@ -46,7 +46,7 @@ public class Game extends RentItem implements MenuActions {
     }
 
     public String listEspecificacionesRec(int contador, String stringsito) {
-        if (contador <= Especificaciones.size()) {
+        if (contador < Especificaciones.size()) {
             return listEspecificacionesRec((contador + 1), (stringsito + Especificaciones.get(contador) + "\n"));
         }
         return stringsito;
@@ -69,6 +69,6 @@ public class Game extends RentItem implements MenuActions {
 
     @Override
     public void ejecutarOpcion(int opcion) {
-        
+
     }
 }

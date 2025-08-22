@@ -6,6 +6,7 @@ public class Lab2Examen1 {
 
         System.out.println("Hello World!");
         System.out.println("A");
+        new ClasePrincipalGui().setVisible(true);
         
     }
     
