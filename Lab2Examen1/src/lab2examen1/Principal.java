@@ -3,6 +3,8 @@ package lab2examen1;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import lab2examen1.ventanas.AgregarItem;
+import lab2examen1.ventanas.Rentar;
 
 public class Principal extends JFrame {
 
@@ -25,18 +27,18 @@ public class Principal extends JFrame {
     }
 
     private void initComponentes() {
-
-        JPanel panel = new JPanel();
+        
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.WHITE);
 
-        titulo.setFont(new Font("Arial", Font.BOLD, 48));
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 48));
         titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
         titulo.setBorder(BorderFactory.createEmptyBorder(50, 0, 50, 0));
+        
         panel.add(titulo);
 
         JButton[] botones = {agregar, rentar, submenu, imprimir, salir};
-        Font fuenteBoton = new Font("Arial", Font.PLAIN, 20);
+        Font fuenteBoton = new Font("Segoe UI", Font.PLAIN, 20);
         for (JButton b : botones) {
             b.setFont(fuenteBoton);
             b.setMaximumSize(new Dimension(250, 40));
@@ -47,11 +49,40 @@ public class Principal extends JFrame {
             panel.add(Box.createRigidArea(new Dimension(0, 15)));
         }
 
-        salir.addActionListener(e -> System.exit(0));
-
+        agregar.addActionListener(e -> agregarAction());
+        rentar.addActionListener(e -> rentarAction());
+        submenu.addActionListener(e -> ejecutarMenuAction());
+        imprimir.addActionListener(e -> imprimirAction());
+        salir.addActionListener(e -> salirAction());
+        
         add(panel);
     }
+    
+    private void agregarAction() {
+        dispose();
+        new AgregarItem().setVisible(true);
+        
+    }
+    
+    private void rentarAction() {
+        dispose();
+        new Rentar().setVisible(true);
+    }
+    
+    private void ejecutarMenuAction() {
+        
+    }
+    
+    private void imprimirAction() {
+        
+    }
+    
+    private void salirAction() {
+        JOptionPane.showMessageDialog(null, "Que tenga lindo dia inge :D!", "DESPEDIDA", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
+    }
 
+    private final JPanel panel = new JPanel();
     private final JLabel titulo = new JLabel("BlockBuster");
     private final JButton agregar = new JButton("Agregar Item");
     private final JButton rentar = new JButton("Rentar");
