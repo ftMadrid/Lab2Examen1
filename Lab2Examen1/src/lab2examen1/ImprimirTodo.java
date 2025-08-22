@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ImprimirTodo extends JFrame {
+    //You are my sunshine , My only sunshine
 
     int paginaActual = 0, paginas;
 
@@ -18,42 +19,47 @@ public class ImprimirTodo extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
-        setLayout(new BorderLayout());
+        setLayout(null);
 
-        // calcular cuántas páginas habrá
-        if (Principal.items.size() == 0) {
+        // calcular cuantas paginitas hay en total
+        if (Principal.items.isEmpty()) {
             paginas = 1;
         } else {
             paginas = (int) Math.ceil(Principal.items.size() / 6.0);
         }
 
-        // Panel central donde van los items
-        panelCartelera = new JPanel(new GridLayout(2, 3, 10, 10)); // 2 filas x 3 columnas
-        JScrollPane scroll = new JScrollPane(panelCartelera);
-        add(scroll, BorderLayout.CENTER);
+        // Panel central
+        panelCartelera = new JPanel(null); // NULL
+        panelCartelera.setBounds(20, 20, 740, 550);
+        add(panelCartelera);
 
-        // Panel de navegación
-        JPanel panelNav = new JPanel();
+        // Panel de nav
+        JPanel panel = new JPanel();
+        panel.setBounds(250, 590, 300, 40);
         btnAnterior = new JButton("Anterior");
         btnSiguiente = new JButton("Siguiente");
-        lblPagina = new JLabel("Página 1 de " + paginas);
+        lblPagina = new JLabel("Pagina 1 de " + paginas);
 
         btnAnterior.addActionListener(e -> cambiarPagina(-1));
         btnSiguiente.addActionListener(e -> cambiarPagina(1));
 
-        panelNav.add(btnAnterior);
-        panelNav.add(lblPagina);
-        panelNav.add(btnSiguiente);
+        panel.add(btnAnterior);
+        panel.add(lblPagina);
+        panel.add(btnSiguiente);
 
-        add(panelNav, BorderLayout.SOUTH);
+        add(panel);
 
         mostrarPagina();
     }
 
     private void cambiarPagina(int dir) {
         paginaActual += dir;
-        if (paginaActual < 0) paginaActual = 0;
-        if (paginaActual >= paginas) paginaActual = paginas - 1;
+        if (paginaActual < 0) {
+            paginaActual = 0;
+        }
+        if (paginaActual >= paginas) {
+            paginaActual = paginas - 1;
+        }
         mostrarPagina();
     }
 
@@ -63,30 +69,57 @@ public class ImprimirTodo extends JFrame {
         int inicio = paginaActual * 6;
         int fin = Math.min(inicio + 6, Principal.items.size());
 
-        // recorro directamente el ArrayList
+        int x = 20, y = 20; //pos ini
+        int ancho = 220, alto = 260; // tamano cartel
+        int contador = 0;//Contador
+
+        // recorrer arr
         for (int i = inicio; i < fin; i++) {
             RentItem item = Principal.items.get(i);
 
-            JPanel panelItem = new JPanel(new BorderLayout());
+            JPanel panelItem = new JPanel(null);
+            panelItem.setBounds(x, y, ancho, alto);
 
-            // Imagen
-            try {
-                ImageIcon icon = new ImageIcon(item.getRuta());
-                Image img = icon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-                JLabel lblImg = new JLabel(new ImageIcon(img));
-                panelItem.add(lblImg, BorderLayout.CENTER);
-            } catch (Exception e) {
-                panelItem.add(new JLabel("Sin imagen"), BorderLayout.CENTER);
+            // img
+            JLabel lblImg;
+            ImageIcon icon;
+            java.net.URL imgURL = getClass().getResource(item.getRuta());
+            System.out.println(item.getRuta());
+            if (imgURL != null) {
+                icon = new ImageIcon(imgURL);
+                Image img = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
+                lblImg = new JLabel(new ImageIcon(img));
+            } else {
+                lblImg = new JLabel("Sin imagen");
+                lblImg.setHorizontalAlignment(SwingConstants.CENTER);
             }
-
-            // Texto (toString de Movie o Game)
-            JTextArea txtInfo = new JTextArea(item.toString());
+            lblImg.setBounds(10, 10, 200, 180);
+            panelItem.add(lblImg);
+            JTextArea txtInfo;
+            String str = "";
+            if (item instanceof Game) {
+                str = ((Game) item).toString();
+            } else if (item instanceof Movie) {
+                str = ((Movie) item).toString();
+            }
+            txtInfo = new JTextArea(str);
             txtInfo.setEditable(false);
             txtInfo.setLineWrap(true);
             txtInfo.setWrapStyleWord(true);
-            panelItem.add(new JScrollPane(txtInfo), BorderLayout.SOUTH);
+            JScrollPane scroll = new JScrollPane(txtInfo);
+            scroll.setBounds(10, 195, 200, 80);
+            panelItem.add(scroll);
 
             panelCartelera.add(panelItem);
+
+            //(3 c x 2 2)
+            contador++;
+            if (contador % 3 == 0) { // pasa a la siguiente fila
+                x = 20;
+                y += alto + 10;
+            } else {
+                x += ancho + 10;
+            }
         }
 
         lblPagina.setText("Página " + (paginaActual + 1) + " de " + paginas);
@@ -96,11 +129,7 @@ public class ImprimirTodo extends JFrame {
     }
 
     public static void main(String[] args) {
-        // Ejemplo: antes deberías cargar items en Principal.items
         Principal.items = new ArrayList<>();
-        // Principal.items.add(new Movie(...));
-        // Principal.items.add(new Game(...));
-
         new ImprimirTodo().setVisible(true);
     }
 }
